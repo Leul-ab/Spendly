@@ -1,0 +1,133 @@
+### Login User
+# @name login
+POST http://localhost:8000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "leul@example.com",
+  "password": "@1234"
+}
+
+### register user
+POST http://localhost:8000/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "Leul",
+  "email": "l@gmail.com",
+  "password": "@1234"
+}
+
+### Set token (must be AFTER login and separated)
+@token = {{login.response.body.data.token}}
+
+
+### Transaction
+### create transaction
+POST http://localhost:8000/api/transactions
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "amount": 100,
+  "type": "INCOME",
+  "categoryId": 1,
+  "date": "2026-05-02",
+  "description": "Salary"
+}
+
+### Get all transactions
+GET http://localhost:8000/api/transactions
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+
+### update transaction
+PUT http://localhost:8000/api/transactions/1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "amount": 150,
+  "type": "income",
+  "categoryId": 1,
+  "date": "2026-05-02",
+  "description": "Updated Salary"
+}
+
+
+### delete transaction
+DELETE http://localhost:8000/api/transactions/1 
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+
+
+
+
+
+### Category
+### create category
+POST http://localhost:8000/api/categories
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Food",
+  "type": "expense"
+}
+
+### get all categories
+GET http://localhost:8000/api/categories
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### update category
+PUT http://localhost:8000/api/categories/7
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Groceries",
+  "type": "expense"
+}
+
+### delete category
+DELETE http://localhost:8000/api/categories/7
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+
+
+### Budget
+### create budget
+POST http://localhost:8000/api/budgets
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "amount": 500,
+  "categoryId": 1,
+  "month": "2026-05"
+}
+
+### get all budgets
+GET http://localhost:8000/api/budgets
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### update budget
+PUT http://localhost:8000/api/budgets/1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "amount": 600,
+  "categoryId": 1,
+  "month": "2026-05"
+}
+
+### delete budget
+DELETE http://localhost:8000/api/budgets/1
+Content-Type: application/json
+Authorization: Bearer {{token}}

@@ -1,0 +1,97 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+//Enums
+enum TransactionType{
+  INCOME
+  EXPENSE
+}
+
+//MODELS
+model User{
+  id          Int       @id @default(autoincrement())
+  email       String    @unique
+  password    String    
+  name        String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+
+  //Relations
+  transaction Transaction[]
+  categories  Category[]
+  budgets     Budget[]
+  tokens      RefreshToken[]
+}
+
+model Category {
+  id        Int      @id @default(autoincrement())
+  name      String
+  createdAt DateTime @default(now())
+
+  // nullable → allows global categories
+  userId Int?
+  user   User? @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Relations
+  transactions Transaction[]
+  budgets      Budget[]
+}
+
+model Transaction {
+  id          Int             @id @default(autoincrement())
+  amount      Float
+  type        TransactionType
+  description String?
+  date        DateTime
+
+  createdAt DateTime @default(now())
+
+  // Foreign Keys
+  userId     Int
+  categoryId Int
+
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  category Category @relation(fields: [categoryId], references: [id])
+
+  @@index([userId])
+  @@index([categoryId])
+  @@index([date])
+}
+
+model Budget {
+  id     Int     @id @default(autoincrement())
+  amount Float
+  month  String  // format: "2026-04"
+
+  // Foreign Keys
+  userId     Int
+  categoryId Int
+
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  category Category @relation(fields: [categoryId], references: [id])
+
+  @@unique([userId, categoryId, month]) // prevent duplicate budgets
+}
+
+model RefreshToken {
+  id        Int      @id @default(autoincrement())
+  token     String   @unique
+  expiresAt DateTime
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+

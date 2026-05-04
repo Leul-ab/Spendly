@@ -1,0 +1,275 @@
+# 💰 Personal Finance API
+
+A **robust and scalable backend API** built with **Node.js, Express, Prisma, and PostgreSQL** for managing personal finances.
+This system allows users to track income and expenses, manage budgets, and gain financial insights through analytics.
+
+---
+
+## 🚀 Overview
+
+The **Personal Finance API** is designed to help users:
+
+* Track income and expenses
+* Organize transactions using categories
+* Set monthly budgets
+* Analyze financial data through dashboards
+
+The project follows **clean architecture principles** and demonstrates real-world backend development practices including authentication, validation, and optimized database design.
+
+---
+
+## 🛠️ Tech Stack
+
+* **Node.js** – Runtime environment
+* **Express.js** – Web framework
+* **Prisma ORM** – Database ORM
+* **PostgreSQL** – Relational database
+* **JWT (JSON Web Token)** – Authentication
+* **Bcrypt** – Password hashing
+* **Swagger (OpenAPI)** – API documentation
+
+---
+
+## 📦 Features
+
+### 🔐 Authentication
+
+* User registration & login
+* Secure password hashing
+* JWT-based authentication
+* Protected routes
+
+---
+
+### 💰 Transactions
+
+* Create, read, and delete transactions
+* Supports:
+
+  * Income
+  * Expenses
+* Filtering:
+
+  * By type
+  * By category
+  * By date range
+* Pagination & sorting
+
+---
+
+### 🗂️ Categories
+
+* Default (global) categories
+* User-defined categories
+* Category-based transaction organization
+
+---
+
+### 💸 Budget Management
+
+* Set monthly budgets per category
+* Update or delete budgets
+* Prevent duplicate budget entries per month
+
+---
+
+### 📊 Analytics Dashboard
+
+* Total income
+* Total expenses
+* Current balance
+* Category-based expense breakdown
+* Monthly financial trends
+
+---
+
+### 📚 API Documentation
+
+* Interactive Swagger UI
+* Available at:
+
+```
+/api/docs
+```
+
+---
+
+## 🧱 Project Structure
+
+```
+src/
+ ├── controllers/      # Handle HTTP requests
+ ├── services/         # Business logic
+ ├── routes/           # API routes
+ ├── middlewares/      # Auth & error handling
+ ├── validators/       # Request validation
+ ├── prisma/           # Prisma schema & client
+ ├── utils/            # Helper functions
+ ├── config/           # Config files (Swagger, env)
+ ├── app.js            # Express app setup
+ └── server.js         # Entry point
+```
+
+---
+
+## ⚙️ Setup Instructions
+
+### 1️⃣ Clone the repository
+
+```bash
+git clone https://github.com/your-username/personal-finance-api.git
+cd personal-finance-api
+```
+
+---
+
+### 2️⃣ Install dependencies
+
+```bash
+npm install
+```
+
+---
+
+### 3️⃣ Setup environment variables
+
+Create a `.env` file:
+
+```env
+DATABASE_URL="postgresql://USER:PASSWORD@localhost:5432/personal_finance"
+JWT_SECRET="your_secret_key"
+PORT=5000
+```
+
+---
+
+### 4️⃣ Setup database
+
+Run Prisma migration:
+
+```bash
+npx prisma migrate dev --name init
+```
+
+---
+
+### 5️⃣ Seed default categories (optional)
+
+```bash
+node src/prisma/seed.js
+```
+
+---
+
+### 6️⃣ Run the server
+
+```bash
+npm run dev
+```
+
+Server will run at:
+
+```
+http://localhost:5000
+```
+
+---
+
+## 🔐 Authentication
+
+All protected routes require a JWT token:
+
+```
+Authorization: Bearer <your_token>
+```
+
+---
+
+## 📡 API Endpoints (Overview)
+
+### Auth
+
+* `POST /api/auth/register`
+* `POST /api/auth/login`
+
+---
+
+### Transactions
+
+* `GET /api/transactions`
+* `POST /api/transactions`
+* `DELETE /api/transactions/:id`
+
+---
+
+### Categories
+
+* `GET /api/categories`
+* `POST /api/categories`
+* `DELETE /api/categories/:id`
+
+---
+
+### Budgets
+
+* `GET /api/budgets`
+* `POST /api/budgets`
+* `DELETE /api/budgets/:id`
+
+---
+
+### Analytics
+
+* `GET /api/analytics/summary`
+* `GET /api/analytics/category`
+* `GET /api/analytics/monthly`
+
+---
+
+## ⚡ Key Highlights
+
+* Clean architecture (Controller → Service → ORM)
+* Secure authentication system
+* Efficient relational database design
+* Advanced querying (pagination, filtering, sorting)
+* Real-world financial analytics
+* Fully documented API with Swagger
+
+---
+
+## 📈 Future Improvements
+
+* Refresh token authentication
+* Email verification & password reset
+* Real-time notifications (budget alerts)
+* Docker containerization & deployment
+* Frontend integration (React)
+
+---
+
+## 👨‍💻 Author
+
+**Your Name**
+Backend Developer
+
+GitHub: https://github.com/your-username
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+## ⭐ Final Note
+
+This project demonstrates **practical backend engineering skills**, including:
+
+* API design
+* Authentication & security
+* Database modeling
+* Performance considerations
+* Production-ready structure
+
+---
