@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "nodemon src/service.js",
     "start": "node src/service.js",
-  "db:generate": "prisma generate",
-  "db:migrate": "prisma migrate deploy",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate deploy",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
